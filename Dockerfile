@@ -1,19 +1,13 @@
-# Use the official Python image based on Alpine Linux
-FROM python:3.9-alpine
+# Use the official TensorFlow image based on Debian
+FROM tensorflow/tensorflow:2.5.0
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app
 
-# Install necessary dependencies
-RUN apk update && apk add --no-cache \
-    build-base \
-    openblas-dev
-
 # Copy the requirements file to the working directory
 COPY requirements.txt ./
 
-# Upgrade pip and install the dependencies
-RUN pip install --upgrade pip
+# Install additional dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code to the working directory
@@ -25,3 +19,4 @@ EXPOSE 5000
 
 # Command to run the Flask app
 CMD ["python", "src/app.py"]
+
