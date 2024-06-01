@@ -1,15 +1,19 @@
 # Use the official Python image based on Alpine Linux
-FROM python:3.9.19-alpine
+FROM python:3.9-alpine
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app
 
+# Install necessary dependencies
+RUN apk update && apk add --no-cache \
+    build-base \
+    openblas-dev
+
 # Copy the requirements file to the working directory
 COPY requirements.txt ./
 
-# Install the dependencies
+# Upgrade pip and install the dependencies
 RUN pip install --upgrade pip
-
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code to the working directory
