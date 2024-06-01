@@ -1,2 +1,2 @@
-numpy==1.19.5
-flask==2.2.2
+numpy==1.19.0
+flask==2.0
